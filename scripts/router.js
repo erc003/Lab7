@@ -5,7 +5,7 @@ export const router = {};
 /**
  * Changes the "page" (state) that your SPA app is currently set to
  */
-router.setState = function() {
+router.setState = function(state) {
   /**
    * - There are three states that your SPA app will have
    *    1. The home page
@@ -35,4 +35,45 @@ router.setState = function() {
    *    1. You may add as many helper functions in this file as you like
    *    2. You may modify the parameters of setState() as much as you like
    */
+
+
+  var s = state['state'];
+  var num = state['num'];
+  var postInfo = state['postInfo'];
+
+  if(s === 'entry') {
+
+    document.querySelector('entry-page').parentNode.removeChild(document.querySelector('entry-page'));   // remove the entry-page tag
+
+    document.querySelector('h1').innerHTML = 'Entry ' + num;   // Set h1 tag
+
+    let newEntry = document.createElement('entry-page');   // create a new page entry
+    newEntry.entry = postInfo;                              
+    document.querySelector('body').appendChild(newEntry);   
+
+    document.querySelector('body').className = 'single-entry';   // Set css to entry-page
+
+    window.location['hash'] = '#entry' + num;   // add hash to "url"
+
+  } else if(s === 'heading') {
+    
+    document.querySelector('h1').innerHTML = 'Journal Entries';   // Set h1 tag
+
+    document.querySelector('body').className = '';   // Set css to be nothing
+
+    window.location['hash'] = '';   // add hash to "url"
+
+  } else if(s === 'setting') {
+
+    document.querySelector('h1').innerHTML = 'Settings';   // Set h1 tag
+
+    document.querySelector('body').className = 'settings';   // Set css to settings
+
+    window.location['hash'] = '#settings';   // add hash to "url"
+
+  } else {
+    alert("WTF HAPPENED!");
+  }
+
+  history.pushState(state, "");
 }
