@@ -57,7 +57,7 @@ router.setState = function(s, num, postInfo, p) {
     // window.location['hash'] = '#entry' + num;   // add hash to "url"
 
     if(p === 1) {
-      history.pushState({ page: 'entry', number: num, content: postInfo, push: 0 }, '', 'http://127.0.0.1:5500/#entry' + num);
+      history.pushState({ page: 'entry', number: num, content: postInfo, push: 0 }, '', '#entry' + num);
     }
 
   } else if(s === 'home') {
@@ -69,7 +69,7 @@ router.setState = function(s, num, postInfo, p) {
     // window.location['hash'] = '';   // add hash to "url"
 
     if(p === 1) {
-      history.pushState({ page: 'home', number: '', content: '', push: 0 }, '', 'http://127.0.0.1:5500/');
+      history.pushState({ page: 'home', number: '', content: '', push: 0 }, '', ' ');
     }
     
 
@@ -82,7 +82,7 @@ router.setState = function(s, num, postInfo, p) {
     // window.location['hash'] = '#settings';   // add hash to "url"
 
     if(p === 1) {
-      history.pushState({ page: 'settings', number: '', content: '', push: 0 }, '', 'http://127.0.0.1:5500/#settings');
+      history.pushState({ page: 'settings', number: '', content: '', push: 0 }, '', '#settings');
     }
 
   } else {
