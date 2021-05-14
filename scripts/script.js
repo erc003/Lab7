@@ -6,8 +6,8 @@ const setState = router.setState;
 // Make sure you register your service worker here too
 var i = 1;
 
-setState('home', '', '', 1);
-setState('home', '', '', 1);
+// setState('home', '', '', 1);
+// setState('home', '', '', 1);
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('https://cse110lab6.herokuapp.com/entries')
