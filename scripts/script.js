@@ -65,7 +65,12 @@ setting.addEventListener('click', () => {
 window.addEventListener('popstate', (e) => {
   console.log(e);
 
-  setState(e['state']['page'], e['state']['number'], e['state']['content'], e['state']['push']);     // e.state.page
+  if(e['state'] === null) {
+    setState('home', '', '', 0);
+  } else {
+    setState(e['state']['page'], e['state']['number'], e['state']['content'], e['state']['push']);     // e.state.page
+  }
+  
 
   // setState(e['state']['page'], '', '');
 
