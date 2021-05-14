@@ -4,10 +4,19 @@ import { router } from './router.js'; // Router imported so you can use it to ma
 const setState = router.setState;
 
 // Make sure you register your service worker here too
-var i = 1;
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
 
-// setState('home', '', '', 1);
-// setState('home', '', '', 1);
+var i = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('https://cse110lab6.herokuapp.com/entries')
@@ -24,16 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
           setState('entry', entryNum, entry, 1);
 
-
-          //   {
-          //   state: 'entry',
-          //   num: entryNum,
-          //   postInfo: entry
-          // });
-
         });
 
-        
         i++;
         
       });
@@ -44,8 +45,6 @@ const heading = document.querySelector('h1');
 
 heading.addEventListener('click', () => {
 
-  // setState({ state: 'heading' });
-
   setState('home', '', '', 1);
 
 });
@@ -55,23 +54,21 @@ const setting = document.querySelector("img[src = 'settings.svg']");
 
 setting.addEventListener('click', () => {
 
-  // setState({ state: 'setting' });
-
   setState('settings', '', '', 1);
 
 });
 
 
 window.addEventListener('popstate', (e) => {
-  console.log(e);
 
   if(e['state'] === null) {
-    setState('home', '', '', 0);
-  } else {
-    setState(e['state']['page'], e['state']['number'], e['state']['content'], e['state']['push']);     // e.state.page
-  }
-  
 
-  // setState(e['state']['page'], '', '');
+    setState('home', '', '', 0);
+
+  } else {
+
+    setState(e['state']['page'], e['state']['number'], e['state']['content'], e['state']['push']);
+
+  }
 
 });
