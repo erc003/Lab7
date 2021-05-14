@@ -5,7 +5,7 @@ export const router = {};
 /**
  * Changes the "page" (state) that your SPA app is currently set to
  */
-router.setState = function(state) {
+router.setState = function(s, num, postInfo, p) {
   /**
    * - There are three states that your SPA app will have
    *    1. The home page
@@ -36,10 +36,11 @@ router.setState = function(state) {
    *    2. You may modify the parameters of setState() as much as you like
    */
 
+  // console.log(JSON.stringify(st));
 
-  var s = state['state'];
-  var num = state['num'];
-  var postInfo = state['postInfo'];
+  // var s = st.state;
+  // var num = st['num'];
+  // var postInfo = st['postInfo'];
 
   if(s === 'entry') {
 
@@ -53,27 +54,39 @@ router.setState = function(state) {
 
     document.querySelector('body').className = 'single-entry';   // Set css to entry-page
 
-    window.location['hash'] = '#entry' + num;   // add hash to "url"
+    // window.location['hash'] = '#entry' + num;   // add hash to "url"
 
-  } else if(s === 'heading') {
+    if(p === 1) {
+      history.pushState({ page: 'entry', number: num, content: postInfo, push: 0 }, '', 'http://127.0.0.1:5500/#entry' + num);
+    }
+
+  } else if(s === 'home') {
     
     document.querySelector('h1').innerHTML = 'Journal Entries';   // Set h1 tag
 
     document.querySelector('body').className = '';   // Set css to be nothing
 
-    window.location['hash'] = '';   // add hash to "url"
+    // window.location['hash'] = '';   // add hash to "url"
 
-  } else if(s === 'setting') {
+    if(p === 1) {
+      history.pushState({ page: 'home', number: '', content: '', push: 0 }, '', 'http://127.0.0.1:5500/');
+    }
+    
+
+  } else if(s === 'settings') {
 
     document.querySelector('h1').innerHTML = 'Settings';   // Set h1 tag
 
     document.querySelector('body').className = 'settings';   // Set css to settings
 
-    window.location['hash'] = '#settings';   // add hash to "url"
+    // window.location['hash'] = '#settings';   // add hash to "url"
+
+    if(p === 1) {
+      history.pushState({ page: 'settings', number: '', content: '', push: 0 }, '', 'http://127.0.0.1:5500/#settings');
+    }
 
   } else {
     alert("WTF HAPPENED!");
   }
 
-  history.pushState(state, "");
 }
